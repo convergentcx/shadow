@@ -1,15 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const Web3 = require("web3");
+// const abi = require("./smart_contract.json");
+
 
 const economyRoutes = require('./routes/economies');
-
 
 app = express();
 
 app.use(bodyParser.json()); // application/json
-
-
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -31,7 +31,10 @@ mongoose.connect('mongodb+srv://achill:w8BG6xR351pqX6DC@cluster0-xfiey.mongodb.n
 
 
 
-    // const Web3 = require("web3");
+const web3 = new Web3(Web3.givenProvider || "https://mainnet.infura.io/v3/f95b0011215b4ae494c029e3da037c24");
+const address = "0xD3f6603fEc53a3175803F5ac99363aA6D3c528Df";
+// const contract = web3.eth.contract(abi).at(address);
+
     // const abi = require("./smart_contract.json");
     
     // if (typeof web3 !== "undefined") {
@@ -40,7 +43,7 @@ mongoose.connect('mongodb+srv://achill:w8BG6xR351pqX6DC@cluster0-xfiey.mongodb.n
     //   // set the provider you want from Web3.providers
     //   web3 = new Web3(new Web3.providers.HttpProvider("http://34.245.74.26:8545"));
     // }
-    // const address = "0xbaa593e9c1f11bbcfa4725085211d764eec26592";
+    // const address = "0xD3f6603fEc53a3175803F5ac99363aA6D3c528Df";
     // const contract = web3.eth.contract(abi).at(address);
     // const event = contract.allEvents({ fromBlock: 0, toBlock: "latest" });
     // const user_repository = require("./user/user_repository");
