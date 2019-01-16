@@ -3,11 +3,16 @@ const Economy = require('../models/economy');
 
 
 exports.getEconomies = (req, res, next) => {
+    console.log('happening');
+
     Economy.find()
         .then(economies => {
             res
                 .status(200)
-                .json({ message: 'Fetched all economies successfully.', economies: economies });
+                .json({ 
+                    message: 'Fetched all economies successfully.', 
+                    // economies: economies // probably too big because of images
+                });
         })
         .catch(err => {
             if (!err.statusCode) {

@@ -7,9 +7,8 @@ const router = express.Router();
 // GET all economies
 router.get('/economies', economiesController.getEconomies);
 
-
 // GET single economy 
-router.get('economies/:tokenAddress', economiesController.getEconomy);
+router.get('/economies/:tokenAddress', economiesController.getEconomy);
 
 // POST (just for testing)
 router.post('/post', economiesController.postEconomy);
