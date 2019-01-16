@@ -77,25 +77,21 @@ socketInstance.events.Created((err, createdEvent) => {
             // if (files) { // HOW COME THERE ARE ECONOMIES WITHOUT FILES ?!
             //     data = JSON.parse(files[0].content.toString());
             // }
-            economy = new Economy({
+            const economy = new Economy({
                 tokenAddress: tokenAddress,
                 ipfsHash: multihash,
                 JSON: files
             });
             economy.save()
-            .then(result => {
-                console.log('New economy saved.')
-                res.status(201).json({
-                    message: 'Economy created successfully!',
-                    economy: result
+                .then(result => {
+                    console.log('New economy saved.')
+                })
+                .catch(err => {
+                    if (!err.statusCode) {
+                        err.statusCode = 500;
+                    }
+                    // next(err);
                 });
-            })
-            .catch(err => {
-                if (!err.statusCode) {
-                    err.statusCode = 500;
-                }
-                // next(err);
-            });
         });
     })
 })
@@ -124,47 +120,45 @@ contract.getPastEvents('Created', { fromBlock: 0, toBlock: "latest" })
                     // if (files) { // HOW COME THERE ARE ECONOMIES WITHOUT FILES ?!
                     //     data = JSON.parse(files[0].content.toString());
                     // }
-                    economy = new Economy({
-                        tokenAddress: tokenAddress,
-                        ipfsHash: multihash,
-                        JSON: files
-                    });
-                    economy.save()
-                    .then(result => {
-                        console.log('Existing economy saved.')
-                        res.status(201).json({
-                            message: 'Economy created successfully!',
-                            economy: result
+                    Economy.findOne({ tokenAddress: tokenAddress })
+                        .then(economy => {
+                            if (!economy) {
+                                const newEconomy = new Economy({
+                                    tokenAddress: tokenAddress,
+                                    ipfsHash: multihash,
+                                    JSON: files
+                                });
+                                newEconomy.save()
+                                    .then(result => {
+                                        console.log('New economy saved.')
+                                        // return res.status(201).json({
+                                        //     message: 'New economy saved!',
+                                        //     economy: result
+                                        // });
+                                    });
+                            }
+                            if (economy.ipfsHash === multihash) {
+                                return
+                            }
+                            economy.ipfsHash = multihash;
+                            economy.JSON = files;
+                            economy.save()
+                                .then(result => {
+                                    console.log('Existing economy updated.')
+                                    // res.status(201).json({
+                                    //     message: 'Existing economy updated!',
+                                    //     economy: result
+                                    // });
+                                });
+                        })
+                        .catch(err => {
+                            if (!err.statusCode) {
+                                err.statusCode = 500;
+                            }
+                            // next(err);
                         });
-                    })
-                    .catch(err => {
-                        if (!err.statusCode) {
-                            err.statusCode = 500;
-                        }
-                        // next(err);
-                    });
                 });
             })
         })
     });
-
-
-
-    //   co(user_repository.getUserByAddress(user_address))
-    //     .then(user => {
-    //       user.endorsement = endorsement;
-    //       user.balance = balance;
-    //       if (user.transactions.filter(x => x.id == transaction.id).length < 1) {
-    //         user.transactions.push(transaction);
-    //       }
-    //       user.save(() =>
-    //         console.log(
-    //           `tx ${
-    //             transaction.id
-    //           }: User ${user_address} saved, endorsement ${endorsement}, balance ${endorsement}`
-    //         )
-    //       );
-    //     })
-    //     .catch(err => logger.error("._."));
-    // });
 
