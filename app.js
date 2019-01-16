@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Web3 = require("web3");
-const factoryAbi = require("./contracts/PersonalEconomy_ABI.json");
+const factoryAbi = require("./contracts/PersonalEconomyFactory.json");
 const economyAbi = require("./contracts/PersonalEconomy.json");
 
 
