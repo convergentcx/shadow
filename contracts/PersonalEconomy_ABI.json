@@ -1,0 +1,131 @@
+[
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "isInstantiation",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function",
+		"signature": "0x2f4f3316"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "instantiations",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function",
+		"signature": "0xb7de9dae"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getInstantiations",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function",
+		"signature": "0xc1ad191a"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "token_address",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"name": "owner_address",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "time",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "name",
+				"type": "string"
+			}
+		],
+		"name": "Created",
+		"type": "event",
+		"signature": "0xf238fcd2133237bc5ae0e1f42086a193f4fddae976468b0797a9260c8f292219"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "instantiation",
+				"type": "address"
+			}
+		],
+		"name": "ContractInstantiation",
+		"type": "event",
+		"signature": "0x4fb057ad4a26ed17a57957fa69c306f11987596069b89521c511fc9a894e6161"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_mhash",
+				"type": "bytes32"
+			},
+			{
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"name": "_symbol",
+				"type": "string"
+			}
+		],
+		"name": "create",
+		"outputs": [
+			{
+				"name": "tokenAddress",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function",
+		"signature": "0xe501fe3c"
+	}
+]

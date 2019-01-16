@@ -8,7 +8,8 @@ exports.getEconomies = (req, res, next) => {
 
 exports.postEconomy = (req, res, next) => {
     const economy = new Economy({
-        address: "0x2",
+        tokenAddress: "0x2",
+        ipfsHash: "3",
         JSON: {}
     })
     economy.save()

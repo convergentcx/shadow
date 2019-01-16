@@ -11,7 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "bs58": "^4.0.1",
     "express": "^4.16.4",
+    "ipfs-api": "^26.1.2",
     "mongoose": "^5.4.4",
     "web3": "^1.0.0-beta.37"
   },
