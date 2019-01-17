@@ -1,17 +1,15 @@
 
 const Economy = require('../models/economy');
 
-
+// GET DATA FOR ALL ECONOMIES (TO LOAD OVERVIEW PAGE)
 exports.getEconomies = (req, res, next) => {
-    console.log('happening');
-
     Economy.find()
         .then(economies => {
             res
                 .status(200)
-                .json({ 
-                    message: 'Fetched all economies successfully.', 
-                    // economies: economies // probably too big because of images
+                .json({
+                    message: 'Fetched all economies successfully.',
+                    economies: economies
                 });
         })
         .catch(err => {
@@ -22,6 +20,7 @@ exports.getEconomies = (req, res, next) => {
         });
 }
 
+// GET DATA FOR A SINGLE ECONOMY USING THE TOKEN ADDRESS EXTRACTED FROM THE ROUTE
 exports.getEconomy = (req, res, next) => {
     const tokenAddress = req.params.tokenAddress;
     Economy.findOne({ tokenAddress: tokenAddress })
@@ -41,17 +40,20 @@ exports.getEconomy = (req, res, next) => {
         });
 }
 
-// ONLY FOR TESTING:
+// POST NEW ECONOMY FROM OUTSIDE // ONLY FOR TESTING/POSTMAN!
 exports.postEconomy = (req, res, next) => {
     const economy = new Economy({
-        tokenAddress: "0x2",
-        ipfsHash: "3",
-        JSON: {}
+        tokenAddress: "0x0",
+        ipfsHash: "XYZ",
+        data: {
+            name: "TEST",
+            symbol: "TEST"
+        }
     })
     economy.save()
         .then(result => {
             res.status(201).json({
-                message: 'Economy created successfully!',
+                message: 'Test economy created successfully!',
                 economy: result
             });
         })

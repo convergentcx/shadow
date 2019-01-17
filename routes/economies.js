@@ -10,7 +10,7 @@ router.get('/economies', economiesController.getEconomies);
 // GET single economy 
 router.get('/economies/:tokenAddress', economiesController.getEconomy);
 
-// POST (just for testing)
+// POST (just for testing with POSTMAN)
 router.post('/post', economiesController.postEconomy);
 
 module.exports = router;
