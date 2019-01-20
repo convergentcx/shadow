@@ -9,6 +9,7 @@ const ipfsApi = require('ipfs-api');
 const getMultihashFromBytes32 = require('./utils/utils');
 
 const Economy = require('./models/economy');
+const userRoutes = require('./routes/users');
 const economyRoutes = require('./routes/economies');
 
 app = express();
@@ -22,7 +23,8 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(economyRoutes)
+app.use(economyRoutes);
+app.use(userRoutes);
 
 
 mongoose.connect('mongodb+srv://achill:w8BG6xR351pqX6DC@cluster0-xfiey.mongodb.net/tokens')
